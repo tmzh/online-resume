@@ -1,15 +1,11 @@
-const nameInput = document.getElementById("name-input");
 const outputArea = document.getElementById("text-output");
 
 let jsonResume = {
-    "First Name": "John",
-    "Last Name": "Snow",
+    "basics": {
+        "name": "John Snow",
+        "label": "King in the north ",
+    }
 };
-
-let mappings = {
-    "first name": "First Name",
-    "last name": "Last Name",
-}
 
 const updateOutput = () => {
     outputArea.innerHTML = JSON.stringify(jsonResume, null, 2);
@@ -18,27 +14,42 @@ const updateOutput = () => {
 
 const dataArea = document.querySelector(".data-area");
 
-for (let key in mappings) {
-    let section = document.createElement("section");
-    dataArea.appendChild(section);
+const addInputElements = (key) => {
 
-    let label = document.createElement("label");
-    label.innerHTML = `${mappings[key]}: `;
+    const section = jsonResume[key];
 
-    let input = document.createElement("input");
-    input.setAttribute("type", "text");
-    input.setAttribute("id", key);
-    input.setAttribute("placeholder", jsonResume[mappings[key]]);
-    input.addEventListener("keyup", () => {
-        jsonResume[key] = input.value;
-        updateOutput();
-    });
+    // Create fieldset
+    let fieldSet = document.createElement("fieldset");
+    fieldSet.appendChild(document.createElement("legend")).innerHTML = key;
+    fieldSet.setAttribute("class", "label-text");
+    dataArea.appendChild(fieldSet)
 
-    section.appendChild(label);
-    section.appendChild(input);
-};
+    // Create input fields
+    for (let child in section) {
+        let entry = document.createElement("div");
 
-createInput();
+        let label = document.createElement("label");
+        label.setAttribute("for", child);
+        label.setAttribute("class", "label-text");
+        label.innerHTML = `${child}: `;
+
+        let input = document.createElement("input");
+        input.setAttribute("type", "text");
+        input.setAttribute("id", child);
+        input.setAttribute("placeholder", section[child]);
+        input.addEventListener("keyup", () => {
+            jsonResume[key][child] = input.value;
+            updateOutput();
+        });
+
+        entry.appendChild(label);
+        entry.appendChild(input);
+        fieldSet.appendChild(entry);
+    };
+
+}
+
+addInputElements("basics");
 
 
 updateOutput();
