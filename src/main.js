@@ -1,18 +1,44 @@
-const inputArea = document.getElementById("text-input");
+const nameInput = document.getElementById("name-input");
 const outputArea = document.getElementById("text-output");
-const btnFormat = document.getElementById("format");
-const btnMinify = document.getElementById("minify");
 
-console.log(btnFormat)
-console.log(inputArea)
+let jsonResume = {
+    "First Name": "John",
+    "Last Name": "Snow",
+};
+
+let mappings = {
+    "first name": "First Name",
+    "last name": "Last Name",
+}
+
+const updateOutput = () => {
+    outputArea.innerHTML = JSON.stringify(jsonResume, null, 2);
+}
 
 
-btnFormat.addEventListener("click", () => {
-    const formatted = JSON.stringify(JSON.parse(inputArea.value), null, 4);
-    outputArea.value = formatted;
-});
+const dataArea = document.querySelector(".data-area");
 
-btnMinify.addEventListener("click", () => {
-    const minified = JSON.stringify(JSON.parse(inputArea.value));
-    outputArea.value = minified;
-});
+for (let key in mappings) {
+    let section = document.createElement("section");
+    dataArea.appendChild(section);
+
+    let label = document.createElement("label");
+    label.innerHTML = `${mappings[key]}: `;
+
+    let input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.setAttribute("id", key);
+    input.setAttribute("placeholder", jsonResume[mappings[key]]);
+    input.addEventListener("keyup", () => {
+        jsonResume[key] = input.value;
+        updateOutput();
+    });
+
+    section.appendChild(label);
+    section.appendChild(input);
+};
+
+createInput();
+
+
+updateOutput();

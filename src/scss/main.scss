@@ -41,21 +41,16 @@ body {
     color: #eee;
 }
 
-.controls {
-    padding: 8px 14px;
-    width: 100%;
-    margin-bottom: 10px;
-    border-radius: 5px;
+.data-area {
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    color: $bg-light;
+    background: $bg-dark;
     border: none;
+    border-radius: 10 px;
     outline: none;
-
-}
-
-button.controls:active {
-    background: #00705a;
-    color: $bg-dark;
-    border: none;
-    border-radius: 5px;
-    outline: none;
+    resize: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     transition: background 0.25s, color 0.25s;
 }
