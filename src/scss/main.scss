@@ -50,3 +50,12 @@ body {
     outline: none;
 
 }
+
+button.controls:active {
+    background: #00705a;
+    color: $bg-dark;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    transition: background 0.25s, color 0.25s;
+}
