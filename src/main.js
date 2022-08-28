@@ -4,6 +4,18 @@ let jsonResume = {
     "basics": {
         "name": "John Snow",
         "label": "King in the north ",
+        "image": "",
+        "email": "john@gmail.com",
+        "phone": "(912) 555-4321",
+        "url": "https://johndoe.com",
+        "summary": "A summary of John Doe…",
+        "location": {
+            "address": "2712 Broadway St",
+            "postalCode": "CA 94115",
+            "city": "San Francisco",
+            "countryCode": "US",
+            "region": "California"
+        },
     }
 };
 
@@ -21,7 +33,7 @@ const addInputElements = (key) => {
     // Create fieldset
     let fieldSet = document.createElement("fieldset");
     fieldSet.appendChild(document.createElement("legend")).innerHTML = key;
-    fieldSet.setAttribute("class", "label-text");
+    fieldSet.setAttribute("class", "border border-solid border-gray-300 p-3");
     dataArea.appendChild(fieldSet)
 
     // Create input fields
@@ -30,7 +42,7 @@ const addInputElements = (key) => {
 
         let label = document.createElement("label");
         label.setAttribute("for", child);
-        label.setAttribute("class", "label-text");
+        label.setAttribute("class", "w-1/4 text-right font-bold");
         label.innerHTML = `${child}: `;
 
         let input = document.createElement("input");
